@@ -28,9 +28,13 @@ class NotesViewController: UIViewController {
         view.addSubview(tableView)
         return tableView
     }()
+    //MARK: - VIEW MODEL
+    private var viewModel: NotesViewModel!
     //MARK: - LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = NotesViewModel()
+        bind()
         view.backgroundColor = .systemBackground
         constraitsNotesTable()
         navBarItem()
@@ -45,6 +49,13 @@ class NotesViewController: UIViewController {
             navBar.topItem?.title = "Заметки"
             navBar.prefersLargeTitles = true
             navigationItem.leftBarButtonItem = letfButton
+        }
+    }
+    //MARK: - BINDING SETUP
+    private func bind() {
+        viewModel.notesBinding = { [weak self]_ in
+            guard let self = self else { return }
+            self.notesTable.reloadData()
         }
     }
     //MARK: - constraits

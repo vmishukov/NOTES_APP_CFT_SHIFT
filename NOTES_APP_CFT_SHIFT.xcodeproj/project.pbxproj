@@ -20,6 +20,7 @@
 		91995DCA2BA725B0007F51C7 /* NotesDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 91995DC82BA725B0007F51C7 /* NotesDataModel.xcdatamodeld */; };
 		91995DCD2BA72972007F51C7 /* NotesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91995DCC2BA72972007F51C7 /* NotesStore.swift */; };
 		91995DCF2BA7360E007F51C7 /* NotesDataProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91995DCE2BA7360E007F51C7 /* NotesDataProviderDelegate.swift */; };
+		91995DD12BA7372B007F51C7 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91995DD02BA7372B007F51C7 /* Binding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		91995DC92BA725B0007F51C7 /* NotesCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotesCoreData.xcdatamodel; sourceTree = "<group>"; };
 		91995DCC2BA72972007F51C7 /* NotesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesStore.swift; sourceTree = "<group>"; };
 		91995DCE2BA7360E007F51C7 /* NotesDataProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesDataProviderDelegate.swift; sourceTree = "<group>"; };
+		91995DD02BA7372B007F51C7 /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				91995DBA2BA6D765007F51C7 /* Notes */,
 				91995DC52BA7252F007F51C7 /* NotesStruct */,
 				91995DCB2BA725C3007F51C7 /* CoreData */,
+				91995DD02BA7372B007F51C7 /* Binding.swift */,
 				91995DAF2BA6AAFE007F51C7 /* Assets.xcassets */,
 				91995DB12BA6AAFE007F51C7 /* LaunchScreen.storyboard */,
 				91995DB42BA6AAFE007F51C7 /* Info.plist */,
@@ -205,6 +208,7 @@
 				91995DA72BA6AAFD007F51C7 /* AppDelegate.swift in Sources */,
 				91995DBF2BA6EA28007F51C7 /* EditNotesController.swift in Sources */,
 				91995DCA2BA725B0007F51C7 /* NotesDataModel.xcdatamodeld in Sources */,
+				91995DD12BA7372B007F51C7 /* Binding.swift in Sources */,
 				91995DCF2BA7360E007F51C7 /* NotesDataProviderDelegate.swift in Sources */,
 				91995DC22BA71DFF007F51C7 /* CreateNotesViewController.swift in Sources */,
 				91995DA92BA6AAFD007F51C7 /* SceneDelegate.swift in Sources */,

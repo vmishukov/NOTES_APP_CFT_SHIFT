@@ -21,7 +21,7 @@ final class NotesStore: NSObject {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         self.init(context: context)
     }
-    init (context: NSManagedObjectContext) {
+    private init (context: NSManagedObjectContext) {
         self.context = context
     }
     // MARK: - FetchedResultsControllerSetup

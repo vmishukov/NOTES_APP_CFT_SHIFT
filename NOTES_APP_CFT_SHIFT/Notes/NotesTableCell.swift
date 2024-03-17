@@ -11,6 +11,7 @@ import UIKit
 final class NotesTableCell: UITableViewCell {
     //MARK: - Identifer
     static let cellIdentifer = "NotesCell"
+    var noteId: UUID?
     // MARK: - Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
