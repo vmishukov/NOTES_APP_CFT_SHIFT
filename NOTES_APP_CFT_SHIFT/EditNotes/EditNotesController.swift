@@ -10,17 +10,23 @@ import UIKit
 
 final class EditNotesController: UIViewController {
     //MARK: - UI
+    private lazy var editNotestTitle : UILabel = {
+        let label = UILabel()
+        label.text = "Редактирование заметки"
+        label.font = .systemFont(ofSize: 25, weight: .bold)
+        view.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private lazy var editNotesTextField : UITextField = {
         let textField = UITextField()
         let paddingViewLeft: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
         textField.leftView = paddingViewLeft
         textField.leftViewMode = .always
-        
-       // textField.layer.backgroundColor = UIColor(red: 0.902, green: 0.91, blue: 0.922, alpha: 0.3).cgColor
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Название заметки"
-        //textField.layer.cornerRadius = 16
-        textField.backgroundColor = .systemGroupedBackground
+       // textField.backgroundColor = .systemGroupedBackground
         textField.tintColor = .systemBlue
         textField.borderStyle = .bezel
         textField.clearButtonMode = .always
@@ -42,11 +48,38 @@ final class EditNotesController: UIViewController {
         label.isHidden = true
         return label
     }()
+    
+    private lazy var editNotesTextView: UITextView = {
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.layer.borderWidth = 1
+        textView.layer.borderColor = UIColor.systemGray2.cgColor
+        textView.delegate = self
+        textView.font = UIFont.systemFont(ofSize: 25)
+        view.addSubview(textView)
+        return textView
+    }()
+    
+    private lazy var editNotesButton: UIButton = {
+        let button = UIButton(type: .system) as UIButton
+        button.backgroundColor = .systemBlue
+        button.setTitle("Подтвердить", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        button.addTarget(self, action: #selector(didTapEditNotes), for: .touchUpInside)
+        view.addSubview(button)
+        return button
+    }()
+    
     //MARK: - LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        constraitsEditNotestTitle()
         constraitEditNotesTextField()
         constraitEditNotesErrLabel()
+        constraitsEditNotesButton()
+        consraiteditNotesTextView()
         view.backgroundColor = .systemBackground
     }
     
@@ -54,16 +87,43 @@ final class EditNotesController: UIViewController {
     @objc func textFieldDidChange(_ textField: UITextField) {
       //  updateButtonStatus()
     }
+    
+    @objc func didTapEditNotes(_ textField: UITextField) {
+      //  updateButtonStatus()
+    }
+    
     @objc func hideKeyboard() {
         self.editNotesTextField.endEditing(true)
     }
     //MARK: - CONSTRAITS
+    private func constraitsEditNotestTitle() {
+        NSLayoutConstraint.activate([
+            editNotestTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            editNotestTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 15)
+        ])
+    }
+    private func constraitsEditNotesButton() {
+        NSLayoutConstraint.activate([
+            editNotesButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 10),
+            editNotesButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            editNotesButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            editNotesButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    private func consraiteditNotesTextView() {
+        NSLayoutConstraint.activate([
+            editNotesTextView.topAnchor.constraint(equalTo: editNotesErrLabel.bottomAnchor,constant: 5),
+            editNotesTextView.bottomAnchor.constraint(equalTo: editNotesButton.topAnchor, constant: -20),
+            editNotesTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            editNotesTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+    }
     private func constraitEditNotesTextField() {
         NSLayoutConstraint.activate([
             editNotesTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             editNotesTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            editNotesTextField.topAnchor.constraint(equalTo: view.topAnchor,constant: 40),
+            editNotesTextField.topAnchor.constraint(equalTo: editNotestTitle.topAnchor,constant: 40),
             editNotesTextField.heightAnchor.constraint(equalToConstant: 75)
         ])
         constraitEditNotesErrLabel()
@@ -75,11 +135,8 @@ final class EditNotesController: UIViewController {
         ])
     }
 }
-
 //MARK: - UITextFieldDelegate
 extension EditNotesController: UITextFieldDelegate{
-    
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if (textField.text?.count ?? 0) +  (string.count - range.length) >= 38 {
             editNotesErrLabel.isHidden = false
@@ -88,14 +145,18 @@ extension EditNotesController: UITextFieldDelegate{
         editNotesErrLabel.isHidden = true
         return true
     }
-    
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         editNotesErrLabel.isHidden = true
         return true
     }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.editNotesTextField.resignFirstResponder()
         return true
+    }
+}
+//MARK: - UITextViewDelegate
+extension EditNotesController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        return textView.text.count + (text.count - range.length) <= 500
     }
 }

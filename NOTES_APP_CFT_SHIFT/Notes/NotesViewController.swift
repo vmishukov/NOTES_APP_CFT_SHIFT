@@ -41,7 +41,7 @@ class NotesViewController: UIViewController {
             let letfButton = UIBarButtonItem(
                 barButtonSystemItem: .add,
                 target: self,
-                action: nil)
+                action: #selector(Self.didTapAddNoteButton))
             navBar.topItem?.title = "Заметки"
             navBar.prefersLargeTitles = true
             navigationItem.leftBarButtonItem = letfButton
@@ -55,6 +55,11 @@ class NotesViewController: UIViewController {
             notesTable.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             notesTable.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+    }
+    //MARK: - OBJC
+    @objc private func didTapAddNoteButton(_ sender: UIButton) {
+        let view = CreateNotesViewController()
+        present(view, animated: true)
     }
     //MARK: - CONFIGURATION MENU SETUP
     func configureContextMenu(indexPath: IndexPath) -> UIContextMenuConfiguration{
