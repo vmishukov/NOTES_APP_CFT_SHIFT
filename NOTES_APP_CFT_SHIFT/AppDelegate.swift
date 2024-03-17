@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,7 +29,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    // MARK: - Core Data stack
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "NotesDataModel")
+        container.loadPersistentStores(completionHandler: {  (storeDescription, error) in
+            if let error = error as NSError? {
+                
+            }
+        })
+        return container
+    }()
 
+    // MARK: - Core Data Saving support
+    func saveContext () {
+        let contex = persistentContainer.viewContext
+        if contex.hasChanges {
+            do {
+                try contex.save()
+            } catch {
+                let nserror = error as NSError
+                assertionFailure("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
 
 }
-

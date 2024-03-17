@@ -16,6 +16,10 @@
 		91995DBF2BA6EA28007F51C7 /* EditNotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91995DBE2BA6EA28007F51C7 /* EditNotesController.swift */; };
 		91995DC22BA71DFF007F51C7 /* CreateNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91995DC12BA71DFF007F51C7 /* CreateNotesViewController.swift */; };
 		91995DC42BA720A7007F51C7 /* NotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91995DC32BA720A7007F51C7 /* NotesViewModel.swift */; };
+		91995DC72BA72550007F51C7 /* NotesStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91995DC62BA72550007F51C7 /* NotesStruct.swift */; };
+		91995DCA2BA725B0007F51C7 /* NotesDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 91995DC82BA725B0007F51C7 /* NotesDataModel.xcdatamodeld */; };
+		91995DCD2BA72972007F51C7 /* NotesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91995DCC2BA72972007F51C7 /* NotesStore.swift */; };
+		91995DCF2BA7360E007F51C7 /* NotesDataProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91995DCE2BA7360E007F51C7 /* NotesDataProviderDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		91995DBE2BA6EA28007F51C7 /* EditNotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNotesController.swift; sourceTree = "<group>"; };
 		91995DC12BA71DFF007F51C7 /* CreateNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNotesViewController.swift; sourceTree = "<group>"; };
 		91995DC32BA720A7007F51C7 /* NotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewModel.swift; sourceTree = "<group>"; };
+		91995DC62BA72550007F51C7 /* NotesStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesStruct.swift; sourceTree = "<group>"; };
+		91995DC92BA725B0007F51C7 /* NotesCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotesCoreData.xcdatamodel; sourceTree = "<group>"; };
+		91995DCC2BA72972007F51C7 /* NotesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesStore.swift; sourceTree = "<group>"; };
+		91995DCE2BA7360E007F51C7 /* NotesDataProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesDataProviderDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +75,8 @@
 				91995DC02BA71DE9007F51C7 /* CreateNotes */,
 				91995DBD2BA6E9FC007F51C7 /* EditNotes */,
 				91995DBA2BA6D765007F51C7 /* Notes */,
+				91995DC52BA7252F007F51C7 /* NotesStruct */,
+				91995DCB2BA725C3007F51C7 /* CoreData */,
 				91995DAF2BA6AAFE007F51C7 /* Assets.xcassets */,
 				91995DB12BA6AAFE007F51C7 /* LaunchScreen.storyboard */,
 				91995DB42BA6AAFE007F51C7 /* Info.plist */,
@@ -98,6 +108,24 @@
 				91995DC12BA71DFF007F51C7 /* CreateNotesViewController.swift */,
 			);
 			path = CreateNotes;
+			sourceTree = "<group>";
+		};
+		91995DC52BA7252F007F51C7 /* NotesStruct */ = {
+			isa = PBXGroup;
+			children = (
+				91995DC62BA72550007F51C7 /* NotesStruct.swift */,
+			);
+			path = NotesStruct;
+			sourceTree = "<group>";
+		};
+		91995DCB2BA725C3007F51C7 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				91995DC82BA725B0007F51C7 /* NotesDataModel.xcdatamodeld */,
+				91995DCC2BA72972007F51C7 /* NotesStore.swift */,
+				91995DCE2BA7360E007F51C7 /* NotesDataProviderDelegate.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,9 +199,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				91995DBC2BA6D77D007F51C7 /* NotesTableCell.swift in Sources */,
+				91995DCD2BA72972007F51C7 /* NotesStore.swift in Sources */,
 				91995DAB2BA6AAFD007F51C7 /* NotesViewController.swift in Sources */,
+				91995DC72BA72550007F51C7 /* NotesStruct.swift in Sources */,
 				91995DA72BA6AAFD007F51C7 /* AppDelegate.swift in Sources */,
 				91995DBF2BA6EA28007F51C7 /* EditNotesController.swift in Sources */,
+				91995DCA2BA725B0007F51C7 /* NotesDataModel.xcdatamodeld in Sources */,
+				91995DCF2BA7360E007F51C7 /* NotesDataProviderDelegate.swift in Sources */,
 				91995DC22BA71DFF007F51C7 /* CreateNotesViewController.swift in Sources */,
 				91995DA92BA6AAFD007F51C7 /* SceneDelegate.swift in Sources */,
 				91995DC42BA720A7007F51C7 /* NotesViewModel.swift in Sources */,
@@ -389,6 +421,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		91995DC82BA725B0007F51C7 /* NotesDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				91995DC92BA725B0007F51C7 /* NotesCoreData.xcdatamodel */,
+			);
+			currentVersion = 91995DC92BA725B0007F51C7 /* NotesCoreData.xcdatamodel */;
+			path = NotesDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 91995D9B2BA6AAFD007F51C7 /* Project object */;
 }

@@ -6,3 +6,7 @@
 //
 
 import Foundation
+import Foundation
+protocol NotesDataProviderDelegate: AnyObject {
+    func notesStoreDidChange()
+}
