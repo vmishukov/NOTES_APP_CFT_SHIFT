@@ -3,4 +3,54 @@
    uuid = "A1F0CE25-FB71-4267-AD4A-BCCA2D9879F4"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "47073BEB-C203-46DD-8C4E-0FC92B4A77DF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NOTES_APP_CFT_SHIFT/CoreData/NotesStore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "controllerDidChangeContent(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "47073BEB-C203-46DD-8C4E-0FC92B4A77DF - c89a6d345db5d20c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NOTES_APP_CFT_SHIFT.NotesStore.controllerDidChangeContent(__C.NSFetchedResultsController&lt;__C.NSFetchRequestResult&gt;) -&gt; ()"
+                  moduleName = "NOTES_APP_CFT_SHIFT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/Swift%20projects/NOTES_APP_CFT_SHIFT/NOTES_APP_CFT_SHIFT/CoreData/NotesStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "47073BEB-C203-46DD-8C4E-0FC92B4A77DF - c89a6d345db5d2ce"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NOTES_APP_CFT_SHIFT.NotesStore.controllerDidChangeContent(__C.NSFetchedResultsController&lt;__C.NSFetchRequestResult&gt;) -&gt; ()"
+                  moduleName = "NOTES_APP_CFT_SHIFT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Applications/Swift%20projects/NOTES_APP_CFT_SHIFT/NOTES_APP_CFT_SHIFT/CoreData/NotesStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "111"
+                  endingLineNumber = "111"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

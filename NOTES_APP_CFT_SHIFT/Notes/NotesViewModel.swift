@@ -32,6 +32,14 @@ final class NotesViewModel {
             assertionFailure("\(error)")
         }
     }
+    
+    public func editNote(editedNote: Note) {
+        do {
+            try dataProvider.editNote(note: editedNote)
+        } catch {
+            assertionFailure("\(error)")
+        }
+    }
     public func deleteNote(noteId: UUID) {
         do {
             try dataProvider.deleteNote(noteId: noteId)

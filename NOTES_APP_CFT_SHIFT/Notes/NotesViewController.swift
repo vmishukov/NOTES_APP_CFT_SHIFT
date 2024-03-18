@@ -70,6 +70,7 @@ class NotesViewController: UIViewController {
     //MARK: - OBJC
     @objc private func didTapAddNoteButton(_ sender: UIButton) {
         let view = CreateNotesViewController()
+        view.delegate = self
         present(view, animated: true)
     }
     //MARK: - CONFIGURATION MENU SETUP
@@ -79,14 +80,17 @@ class NotesViewController: UIViewController {
             guard let cell = self.notesTable.cellForRow(at: indexPath) as? NotesTableCell else {
                 return nil
             }
+            /*
             let edit = UIAction(title: "Редактировать" ) { (_) in
                 let view = EditNotesController()
+                view.delegate = self
                 self.present(view,animated: true)
             }
+             */
             let deleteAction = UIAction(title: "Удалить", attributes: .destructive) { _ in
                 let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { _ in
-                    //guard let uuid = cell.getUiid() else { return }
-                    //self.viewModel.removeTracker(trackerId: uuid)
+                    guard let uuid = cell.noteId else { return }
+                    self.viewModel.deleteNote(noteId: uuid)
                 }
                 let cancelAction = UIAlertAction(title: "Отменить", style: .cancel)
                 let alert = UIAlertController(title: "Вы действительно хотите удалить запись?", message: nil, preferredStyle: .actionSheet)
@@ -94,7 +98,7 @@ class NotesViewController: UIViewController {
                 alert.addAction(cancelAction)
                 self.present(alert, animated: true)
             }
-            return UIMenu( children: [edit, deleteAction])
+            return UIMenu( children: [deleteAction])
         }
         return context
     }
@@ -103,7 +107,7 @@ class NotesViewController: UIViewController {
 //MARK: - UITableViewDataSource
 extension NotesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        viewModel.notes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,22 +115,36 @@ extension NotesViewController: UITableViewDataSource {
             assertionFailure("Не удалось выполнить приведение к SettingsHabitOrEventCell")
             return UITableViewCell()
         }
-        cell.textLabel?.text = "dsdsd"
-        cell.detailTextLabel?.text = "dsds"
+        cell.noteId = viewModel.notes[indexPath.row].id
+        cell.textLabel?.text = viewModel.notes[indexPath.row].title
+        cell.detailTextLabel?.text = viewModel.notes[indexPath.row].note
         return cell
     }
-    
 }
 //MARK: - UITableViewDelegate
 extension NotesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let view = EditNotesController()
+        view.delegate = self
         present(view,animated: true)
+        view.setupEdit(title: viewModel.notes[indexPath.row].title, note: viewModel.notes[indexPath.row].note, noteId: viewModel.notes[indexPath.row].id)
         tableView.deselectRow(at: indexPath, animated: true)
-        
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         configureContextMenu(indexPath: indexPath)
+    }
+}
+
+//MARK: - CreateNotesDelegate
+extension NotesViewController: CreateNotesDelegate {
+    func createNewNote(note: Note) {
+        viewModel.addNote(note: note)
+    }
+}
+//MARK: -
+extension NotesViewController: EditNotesDelegate {
+    func editNote(editedNote: Note) {
+        viewModel.editNote(editedNote: editedNote)
     }
 }

@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 final class CreateNotesViewController: UIViewController {
+    //MARK: - DELEGATE
+    weak var delegate: CreateNotesDelegate?
     //MARK: - UI
     private lazy var createNotestTitle : UILabel = {
         let label = UILabel()
@@ -26,7 +28,6 @@ final class CreateNotesViewController: UIViewController {
         textField.leftViewMode = .always
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Название заметки"
-       // textField.backgroundColor = .systemGroupedBackground
         textField.tintColor = .systemBlue
         textField.borderStyle = .bezel
         textField.clearButtonMode = .always
@@ -89,7 +90,10 @@ final class CreateNotesViewController: UIViewController {
     }
     
     @objc func didTapcreateNotes(_ textField: UITextField) {
-      //  updateButtonStatus()
+        guard let title = createNotesTextField.text, let note = createNotesTextView.text else { return }
+        let newNote = Note(id: UUID(), title: title, note: note)
+        delegate?.createNewNote(note: newNote)
+        self.dismiss(animated: true)
     }
     
     @objc func hideKeyboard() {

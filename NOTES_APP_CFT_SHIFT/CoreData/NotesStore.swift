@@ -23,6 +23,8 @@ final class NotesStore: NSObject {
     }
     private init (context: NSManagedObjectContext) {
         self.context = context
+        super.init()
+        FetchedResultsControllerSetup()
     }
     // MARK: - FetchedResultsControllerSetup
     private func FetchedResultsControllerSetup() {
@@ -44,6 +46,18 @@ final class NotesStore: NSObject {
         NotesCoreData.note = note.note
         try context.save()
     }
+    // MARK: - ADD NOTE
+    func editNote(note: Note) throws {
+        let fetchNotesCoreData = NotesCoreData.fetchRequest()
+        fetchNotesCoreData.predicate = NSPredicate(format: "%K == %@",
+                                                   #keyPath(NotesCoreData.noteId),
+                                                   note.id as CVarArg)
+        guard let noteToEdit = try context.fetch(fetchNotesCoreData).first else { return }
+        noteToEdit.title = note.title
+        noteToEdit.note = note.note
+        try context.save()
+    }
+    
     // MARK: - REMOVE NOTE
     func deleteNote(noteId: UUID) throws {
         let noteRequest = NotesCoreData.fetchRequest()

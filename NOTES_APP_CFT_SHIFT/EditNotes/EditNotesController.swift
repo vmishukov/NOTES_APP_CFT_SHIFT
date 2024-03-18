@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 final class EditNotesController: UIViewController {
+    //MARK: - DELEGATE
+    weak var delegate: EditNotesDelegate?
     //MARK: - UI
     private lazy var editNotestTitle : UILabel = {
         let label = UILabel()
@@ -71,7 +73,8 @@ final class EditNotesController: UIViewController {
         view.addSubview(button)
         return button
     }()
-    
+    //MARK: - PUBLIC
+    var noteId: UUID?
     //MARK: - LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +82,7 @@ final class EditNotesController: UIViewController {
         constraitEditNotesTextField()
         constraitEditNotesErrLabel()
         constraitsEditNotesButton()
+
         consraiteditNotesTextView()
         view.backgroundColor = .systemBackground
     }
@@ -89,11 +93,20 @@ final class EditNotesController: UIViewController {
     }
     
     @objc func didTapEditNotes(_ textField: UITextField) {
-      //  updateButtonStatus()
+        guard let title = editNotesTextField.text, let note = editNotesTextView.text, let noteId = noteId else { return }
+        let editedNote = Note(id: noteId, title: title, note: note)
+        delegate?.editNote(editedNote: editedNote)
+        self.dismiss(animated: true)
     }
     
     @objc func hideKeyboard() {
         self.editNotesTextField.endEditing(true)
+    }
+    //MARK: - public func
+    public func setupEdit(title: String?, note: String?, noteId: UUID) {
+        editNotesTextField.text = title
+        editNotesTextView.text = note
+        self.noteId = noteId
     }
     //MARK: - CONSTRAITS
     private func constraitsEditNotestTitle() {

@@ -21,6 +21,8 @@
 		91995DCD2BA72972007F51C7 /* NotesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91995DCC2BA72972007F51C7 /* NotesStore.swift */; };
 		91995DCF2BA7360E007F51C7 /* NotesDataProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91995DCE2BA7360E007F51C7 /* NotesDataProviderDelegate.swift */; };
 		91995DD12BA7372B007F51C7 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91995DD02BA7372B007F51C7 /* Binding.swift */; };
+		91995DD32BA8369E007F51C7 /* CreateNotesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91995DD22BA8369E007F51C7 /* CreateNotesDelegate.swift */; };
+		91995DD52BA83BF9007F51C7 /* EditNotesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91995DD42BA83BF9007F51C7 /* EditNotesDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		91995DCC2BA72972007F51C7 /* NotesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesStore.swift; sourceTree = "<group>"; };
 		91995DCE2BA7360E007F51C7 /* NotesDataProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesDataProviderDelegate.swift; sourceTree = "<group>"; };
 		91995DD02BA7372B007F51C7 /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
+		91995DD22BA8369E007F51C7 /* CreateNotesDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNotesDelegate.swift; sourceTree = "<group>"; };
+		91995DD42BA83BF9007F51C7 /* EditNotesDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNotesDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				91995DBE2BA6EA28007F51C7 /* EditNotesController.swift */,
+				91995DD42BA83BF9007F51C7 /* EditNotesDelegate.swift */,
 			);
 			path = EditNotes;
 			sourceTree = "<group>";
@@ -109,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				91995DC12BA71DFF007F51C7 /* CreateNotesViewController.swift */,
+				91995DD22BA8369E007F51C7 /* CreateNotesDelegate.swift */,
 			);
 			path = CreateNotes;
 			sourceTree = "<group>";
@@ -202,8 +208,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				91995DBC2BA6D77D007F51C7 /* NotesTableCell.swift in Sources */,
+				91995DD32BA8369E007F51C7 /* CreateNotesDelegate.swift in Sources */,
 				91995DCD2BA72972007F51C7 /* NotesStore.swift in Sources */,
 				91995DAB2BA6AAFD007F51C7 /* NotesViewController.swift in Sources */,
+				91995DD52BA83BF9007F51C7 /* EditNotesDelegate.swift in Sources */,
 				91995DC72BA72550007F51C7 /* NotesStruct.swift in Sources */,
 				91995DA72BA6AAFD007F51C7 /* AppDelegate.swift in Sources */,
 				91995DBF2BA6EA28007F51C7 /* EditNotesController.swift in Sources */,
