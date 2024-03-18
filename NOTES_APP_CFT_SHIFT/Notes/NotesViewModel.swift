@@ -23,6 +23,7 @@ final class NotesViewModel {
         self.dataProvider = NotesStore()
         self.dataProvider.delegate = self
         setNotes()
+        stubSetup()
     }
     // MARK: - PUBLIC FUNC
     public func addNote(note: Note) {
@@ -71,6 +72,12 @@ final class NotesViewModel {
             }
         } catch {
             assertionFailure("\(error)")
+        }
+    }
+    private func stubSetup() {
+        if self.notes.isEmpty {
+            let stubNote = Note(id: UUID(), title: "Новая заметка", note: "")
+            addNote(note: stubNote)
         }
     }
 }

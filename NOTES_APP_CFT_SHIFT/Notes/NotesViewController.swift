@@ -49,6 +49,13 @@ class NotesViewController: UIViewController {
             navBar.topItem?.title = "Заметки"
             navBar.prefersLargeTitles = true
             navigationItem.leftBarButtonItem = letfButton
+            
+            let rightButton = UIBarButtonItem(
+                barButtonSystemItem: .trash,
+                target: self,
+                action: #selector(didTapDeleteAllButton)
+            )
+            navBar.topItem?.setRightBarButton(rightButton, animated: false)
         }
     }
     //MARK: - BINDING SETUP
@@ -73,6 +80,18 @@ class NotesViewController: UIViewController {
         view.delegate = self
         present(view, animated: true)
     }
+    
+    @objc private func didTapDeleteAllButton(_ sender: UIButton) {
+        let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { _ in
+            self.viewModel.deleteAllNotes()
+        }
+        let cancelAction = UIAlertAction(title: "Отменить", style: .cancel)
+        let alert = UIAlertController(title: "Вы действительно хотите удалить ВСЕ записи?", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true)
+    }
+    
     //MARK: - CONFIGURATION MENU SETUP
     func configureContextMenu(indexPath: IndexPath) -> UIContextMenuConfiguration{
         
@@ -80,13 +99,6 @@ class NotesViewController: UIViewController {
             guard let cell = self.notesTable.cellForRow(at: indexPath) as? NotesTableCell else {
                 return nil
             }
-            /*
-            let edit = UIAction(title: "Редактировать" ) { (_) in
-                let view = EditNotesController()
-                view.delegate = self
-                self.present(view,animated: true)
-            }
-             */
             let deleteAction = UIAction(title: "Удалить", attributes: .destructive) { _ in
                 let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { _ in
                     guard let uuid = cell.noteId else { return }
