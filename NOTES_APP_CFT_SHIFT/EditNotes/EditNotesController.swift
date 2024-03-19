@@ -15,10 +15,23 @@ final class EditNotesController: UIViewController {
     private lazy var editNotestTitle : UILabel = {
         let label = UILabel()
         label.text = "Редактирование заметки"
-        label.font = .systemFont(ofSize: 25, weight: .bold)
+        label.font = .systemFont(ofSize: 22, weight: .bold)
         view.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    private lazy var doneEditButton : UIButton = {
+        let button = UIButton(type: .system) as UIButton
+        button.backgroundColor = .systemBlue
+        button.setTitle("Готово", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        button.isHidden = true
+        button.addTarget(self, action: #selector(didTapDoneEditButton), for: .touchUpInside)
+        view.addSubview(button)
+        return button
     }()
     
     private lazy var editNotesTextField : UITextField = {
@@ -79,6 +92,7 @@ final class EditNotesController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         constraitsEditNotestTitle()
+        constraitsDoneEditButton()
         constraitEditNotesTextField()
         constraitEditNotesErrLabel()
         constraitsEditNotesButton()
@@ -91,14 +105,15 @@ final class EditNotesController: UIViewController {
     @objc func textFieldDidChange(_ textField: UITextField) {
       //  updateButtonStatus()
     }
-    
-    @objc func didTapEditNotes(_ textField: UITextField) {
+    @objc func didTapEditNotes(_ sender: UIButton) {
         guard let title = editNotesTextField.text, let note = editNotesTextView.text, let noteId = noteId else { return }
         let editedNote = Note(id: noteId, title: title, note: note)
         delegate?.editNote(editedNote: editedNote)
         self.dismiss(animated: true)
     }
-    
+    @objc func didTapDoneEditButton(_ sender: UIButton) {
+        editNotesTextView.endEditing(true)
+    }
     @objc func hideKeyboard() {
         self.editNotesTextField.endEditing(true)
     }
@@ -111,8 +126,15 @@ final class EditNotesController: UIViewController {
     //MARK: - CONSTRAITS
     private func constraitsEditNotestTitle() {
         NSLayoutConstraint.activate([
-            editNotestTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            editNotestTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             editNotestTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 15)
+        ])
+    }
+    private func constraitsDoneEditButton() {
+        NSLayoutConstraint.activate([
+            doneEditButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            doneEditButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 15),
+            doneEditButton.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
     private func constraitsEditNotesButton() {
@@ -171,5 +193,13 @@ extension EditNotesController: UITextFieldDelegate{
 extension EditNotesController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         return textView.text.count + (text.count - range.length) <= 500
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        doneEditButton.isHidden = false
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        doneEditButton.isHidden = true
     }
 }

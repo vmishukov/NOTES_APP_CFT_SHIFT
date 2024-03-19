@@ -21,6 +21,20 @@ final class CreateNotesViewController: UIViewController {
         return label
     }()
     
+    private lazy var doneEditButton : UIButton = {
+        let button = UIButton(type: .system) as UIButton
+        button.backgroundColor = .systemBlue
+        button.setTitle("Готово", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        button.isHidden = true
+        button.addTarget(self, action: #selector(didTapDoneEditButton), for: .touchUpInside)
+        view.addSubview(button)
+        return button
+        
+    }()
+        
     private lazy var createNotesTextField : UITextField = {
         let textField = UITextField()
         let paddingViewLeft: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
@@ -68,7 +82,7 @@ final class CreateNotesViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        button.addTarget(self, action: #selector(didTapcreateNotes), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapСreateNotes), for: .touchUpInside)
         view.addSubview(button)
         return button
     }()
@@ -77,6 +91,7 @@ final class CreateNotesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         constraitsCreateNotestTitle()
+        constraitsDoneEditButton()
         constraitsCreateNotesTextField()
         constraitsCreateNotesErrLabel()
         constraitsCreateNotesButton()
@@ -89,12 +104,17 @@ final class CreateNotesViewController: UIViewController {
       //  updateButtonStatus()
     }
     
-    @objc func didTapcreateNotes(_ textField: UITextField) {
+    @objc func didTapDoneEditButton(_ sender: UIButton) {
+        createNotesTextView.endEditing(true)
+    }
+    
+    @objc func didTapСreateNotes(_ sender: UIButton) {
         guard let title = createNotesTextField.text, let note = createNotesTextView.text else { return }
         let newNote = Note(id: UUID(), title: title, note: note)
         delegate?.createNewNote(note: newNote)
         self.dismiss(animated: true)
     }
+    
     
     @objc func hideKeyboard() {
         self.createNotesTextField.endEditing(true)
@@ -102,7 +122,7 @@ final class CreateNotesViewController: UIViewController {
     //MARK: - CONSTRAITS
     private func constraitsCreateNotestTitle() {
         NSLayoutConstraint.activate([
-            createNotestTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            createNotestTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             createNotestTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 15)
         ])
     }
@@ -112,6 +132,13 @@ final class CreateNotesViewController: UIViewController {
             createNotesButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             createNotesButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             createNotesButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    private func constraitsDoneEditButton() {
+        NSLayoutConstraint.activate([
+            doneEditButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            doneEditButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 15),
+            doneEditButton.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
     private func consraitsCreateNotesTextView() {
@@ -163,4 +190,13 @@ extension CreateNotesViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         return textView.text.count + (text.count - range.length) <= 500
     }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        doneEditButton.isHidden = false
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        doneEditButton.isHidden = true
+    }
+    
 }
